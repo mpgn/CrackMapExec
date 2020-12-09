@@ -55,8 +55,7 @@ def build_cme():
 if __name__ == "__main__":
     try:
         build_cme()
-    except:
-        printt("error")
-        return False
+    except Exception as e:
+        printt("error", e)
     finally:
         shutil.rmtree("build")
