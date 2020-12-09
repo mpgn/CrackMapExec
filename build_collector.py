@@ -11,7 +11,7 @@ from pathlib import Path
 
 from shiv.bootstrap import Environment
 
-# from distutils.ccompiler import new_compiler
+from distutils.ccompiler import new_compiler
 from shiv.builder import create_archive
 from shiv.cli import __version__ as VERSION
 
@@ -30,7 +30,7 @@ def build_cme():
         check=True
     )
 
-    #[shutil.rmtree(p) for p in Path("build").glob("**/__pycache__")]
+    [shutil.rmtree(p) for p in Path("build").glob("**/__pycache__")]
     [shutil.rmtree(p) for p in Path("build").glob("**/*.dist-info")]
 
     env = Environment(
@@ -52,31 +52,11 @@ def build_cme():
         True,
     )
 
-def build_cmedb():
-    env = Environment(
-        built_at=datetime.utcfromtimestamp(int(time.time())).strftime(
-            "%Y-%m-%d %H:%M:%S"
-        ),
-        entry_point="cme.cmedb:main",
-        script=None,
-        compile_pyc=False,
-        extend_pythonpath=True,
-        shiv_version=VERSION,
-    )
-    create_archive(
-        [Path("build").absolute()],
-        Path("bin/cmedb"),
-        "/usr/bin/env -S python3 -sE",
-        "_bootstrap:bootstrap",
-        env,
-        True,
-    )
-
 if __name__ == "__main__":
     try:
         build_cme()
-        build_cmedb()
     except:
-        pass
+        printt("error")
+        return False
     finally:
         shutil.rmtree("build")
