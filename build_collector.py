@@ -42,8 +42,10 @@ def build_cme():
         [sys.executable, "-m", "pip", "install", "-r", "requirements.txt" ,"-t", "build"],
         check=True
     )
+    
+    print("after subprocess")
 
-    #[shutil.rmtree(p) for p in Path("build").glob("**/__pycache__")]
+    [shutil.rmtree(p) for p in Path("build").glob("**/__pycache__")]
     [shutil.rmtree(p) for p in Path("build").glob("**/*.dist-info")]
 
     env = Environment(
@@ -64,6 +66,7 @@ def build_cme():
         env,
         True,
     )
+    print("after archive")
 
 def build_cmedb():
     print("building CMEDB")
@@ -89,7 +92,7 @@ def build_cmedb():
 if __name__ == "__main__":
     try:
         build_cme()
-        build_cmedb()
+        #build_cmedb()
     except:
         pass
     finally:
