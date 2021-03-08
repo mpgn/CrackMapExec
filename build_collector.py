@@ -38,10 +38,7 @@ def build_cme():
     shutil.rmtree("cme/data/powersploit/CodeExecution/Invoke-ReflectivePEInjection_Resources/")
     shutil.rmtree("cme/data/powersploit/Exfiltration/LogonUser/")
     shutil.rmtree("cme/data/powersploit/Tests/")  
-    subprocess.run(
-        [sys.executable, "-m", "pip", "install", "-r", "requirements.txt" ,"-t", "build"],
-        check=True
-    )
+    os.system("pip install -r requirements.txt -t build")
     
     print("after subprocess")
 
